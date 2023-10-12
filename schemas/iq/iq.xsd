@@ -1,0 +1,4848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Tim Olsen (Washington University) -->
+<!-- edited with Eclipse Build id: 20090619-0625 (http://eclipse.org/) by Jenny Gurney (Washington University) 09/28/2009-->
+<xs:schema targetNamespace="http://nrg.wustl.edu/iq" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdat="http://nrg.wustl.edu/xdat" xmlns:xnat="http://nrg.wustl.edu/xnat" xmlns:prov="http://www.nbirn.net/prov" xmlns:iq="http://nrg.wustl.edu/iq" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://nrg.wustl.edu/xnat" schemaLocation="../xnat/xnat.xsd"/>
+	<xs:element name="IQAssessment" type="iq:iqAssessmentData"/>
+	<xs:complexType name="abstractIQTest" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<xs:documentation>Abstract Instance of IQ Test</xs:documentation>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence minOccurs="0">
+			<xs:element name="note" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="iqAssessmentData">
+		<xs:complexContent>
+			<xs:extension base="xnat:subjectAssessorData">
+				<xs:sequence>
+					<xs:element name="fsiq" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Full Scale IQ Score</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:minInclusive value="0"/>
+								<xs:maxInclusive value="250"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="verbalIq" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Verbal IQ Score</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:minInclusive value="0"/>
+								<xs:maxInclusive value="250"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="performanceIq" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Verbal IQ Score</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:minInclusive value="0"/>
+								<xs:maxInclusive value="250"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="iqSrc" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+					IQ Source (wais, wasi, wisc, etc.)  			
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="500"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="iqTest" type="iq:abstractIQTest" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>IQ Test</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="wasi1999Data">
+		<xs:complexContent>
+			<xs:extension base="iq:abstractIQTest">
+				<xs:sequence>
+					<xs:element name="wasi_v_raw" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Vocabulary Raw Score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:minInclusive value="0"/>
+								<xs:maxInclusive value="80"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_v_t" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Vocabulary T-score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:maxInclusive value="100"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_v_note" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Vocabulary Notation If Total Not Available (e.g. -999, N/A, N/R, N/K)
+        		</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="wasi_b_raw" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Block Raw Score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:maxInclusive value="71"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_b_t" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>wasi Block T-score</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:maxInclusive value="100"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_b_note" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        		wasi Block Notation If Total Not Available (e.g. -999, N/A, N/R, N/K)
+        		</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="wasi_s_raw" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Similarities Raw Score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:maxInclusive value="48"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_s_t" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Similarities T-score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:minInclusive value="0"/>
+								<xs:maxInclusive value="100"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_s_note" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Similarities Notation If Total Not Available (e.g. -999, N/A, N/R, N/K)
+        		</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="wasi_m_raw" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Matrix Reasoning Raw Score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:maxInclusive value="35"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_m_t" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Matrix Reasoning Raw Score
+        		</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:integer">
+								<xs:maxInclusive value="100"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="wasi_m_note" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+        			wasi Matrix Reasoning Notation If Total Not Available (e.g. -999, N/A, N/R, N/K)
+        		</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ScoreForm" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Wechsler Abbreviated Scale of Intelligence Form</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="section1" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Vocabulary</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="vocab1" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+			           1. Fish 
+			           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab2" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            2. Shovel
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab3" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            3. Map
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab4" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            4. Shell
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab5" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            5. Shirt
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab6" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            6. Shoe
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab7" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            7. Flashlight
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab8" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            8. Car
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab9" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            9. Bird
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab10" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            10. Calendar
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab11" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            11. Number 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab12" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            12. Bell
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab13" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            13. Lunch 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response  			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab14" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            14. Police  
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response 			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab15" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            15. Vacation
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab16" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            16. Pet 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab17" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            17. Balloon
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab18" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            18. Transform 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response		
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab19" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            19. Alligator 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response   			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab20" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            20. Cart
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response     			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab21" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            21. Blame
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab22" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            22. Dance
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab23" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            23. Purpose
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response    			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab24" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            24. Entertain 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab25" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            25. Famous
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response  			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab26" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            26. Reveal
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab27" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            27. Decade 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab28" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            28. Tradition
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab29" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            29. Rejoice
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab30" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            30. Enthusiastic
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab31" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            31. Improvise 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab32" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            32. Impulse 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response   			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab33" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            33. Haste
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab34" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            34. Trend 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					 Response      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab35" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            35. Intermittent
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab36" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            36. Devout
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab37" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            37. Impertinent
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab38" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            38. Niche
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab39" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            39. Presumptuous
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab40" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            40. Formidable
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab41" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            41. Ruminate
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="vocab42" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            42. Panacea
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="section2" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Block Design</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="block1" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 1
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="30"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block2" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 2
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block3" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 3
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block4" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 4
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block5" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	           Block 5 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block6" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 6
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block7" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 7
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block8" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 8
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block9" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 9
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="60"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block10" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 10
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="120"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block11" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 11
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="120"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block12" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 12
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="120"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="block13" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Block 13
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="time" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Completion Time in Seconds
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="120"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="correct" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Correct Design
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="7"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="section3" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Similarities</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="similar1" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            1. Four-Wheeled
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="100"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar2" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            2. Dining Items
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="100"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar3" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            3. Clothing
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="100"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar4" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            4. Fruits
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="100"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar5" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            5. Red-Blue
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar6" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            6. Circle-Square
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar7" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            7. Grapes-Strawberries
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar8" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            8. Cow-Bear
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score		
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar9" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            9. Plane-Bus
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar10" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            10. Shirt-Jacket
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar11" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            11. Pen-Pencil
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response	       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score 
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar12" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            12. Bowl-Plate
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar13" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            13. Love-Hate
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar14" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            14. TV-Newspaper
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar15" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            15. Smooth-Rough
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response	        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar16" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            16. Shoulder-Ankle
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar17" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            17. Sit-Run
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar18" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            18. Child-Adult
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response	        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar19" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            19. Steam-Cloud
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar20" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            20. Bird-Flower
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response	        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar21" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            21. More-Less
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar22" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            22. Photograph-Song
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar23" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            23. Peace-War
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score 
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar24" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            24. Capitalism-Socialism
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar25" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	           25. Tradition-Habit 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response	        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="similar26" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	           26. Freedom-Law 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="500"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="2"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="section4" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Matrix Reasoning</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="matrixA" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Sample Item A
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrixB" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Sample Item B 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix1" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 1
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix2" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 2
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix3" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 3
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix4" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 4
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix5" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 5
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix6" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 6
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix7" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 7
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>  
+        			Score     			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix8" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 8
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix9" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 9
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>   
+        			Score    			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix10" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 10
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix11" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 11
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix12" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 12
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix13" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 13
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix14" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 13
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix15" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 15
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix16" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 16
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix17" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 17
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix18" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 18
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix19" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 19
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>   
+        			Score    			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix20" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 20
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix21" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 21
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix22" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 22
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix23" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	           Matrix Item 23 
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix24" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 24
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response	
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Score        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix25" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 25
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix26" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 26
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+					Response        			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix27" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 27
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Score       			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix28" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 28
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix29" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 29
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix30" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 30
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>  
+        			Score     			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix31" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 31
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>  
+        			Score     			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix32" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 32
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix33" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 33
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix34" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 34
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation> 
+        			Score      			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="matrix35" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+	            Matrix Item 35
+	           </xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="response" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>
+        			Response
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="5"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="score" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>  
+        			Score     			
+        		</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:integer">
+																	<xs:minInclusive value="0"/>
+																	<xs:maxInclusive value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="behavOb" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Behavorial Observations</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="reasonRefer" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Reason for Referral/Referral Source
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="attitude" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Attitude Toward Testing (e.g., rapport, work habits, interest, motivation, reaction to success/failure)
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="physAppear" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Physical Appearance
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="attention" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Attention
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="visAudMotor" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Visual/Auditory/Motor Problems
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="lang" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Language (dominant language, language spoken in the home, expressive/receptive)
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="affectMood" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Affect/Mood
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="unusualBehav" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Unusual Behaviors/Verbalizations
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="other" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+        			Other Remarks
+        		</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="10000"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

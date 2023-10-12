@@ -1,0 +1,63 @@
+$page.setTitle("IQ Assessment Scores")
+$page.setLinkColor($ui.alink)
+$page.setVlinkColor($ui.vlink)
+#if ($turbineUtils.GetPassedParameter("popup", $data))
+	#set ($popup = $turbineUtils.GetPassedParameter("popup", data) )
+	#set ($popup = "false")
+#end
+#if(!$project)
+#set($project=$om.getProject())
+#end
+
+#set($test_item=$item.getProperty("iq:iqAssessmentData/iqTest"))
+
+<TABLE width="100%">
+    <TR>
+        <TD>
+        #parse($turbineUtils.getTemplateName("_report",$om.getXSIType(),$project))
+        </TD>
+    	<TD valign="top" align="right">
+    		#elementActionsBox($element $search_field $search_value $data.getSession().getAttribute("user") $item)
+    	</TD>
+    </TR>
+	<TR>
+		<TD>
+			<table width="100%">
+				<TR>
+					<TD align="left" valign="middle">
+						<DIV class="edit_title">IQ Assessment</DIV>
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD colspan="2">
+			<TABLE>
+				<TR>
+					<TD>Derived Full Scale IQ (FSIQ)</TD>
+					<TD>$!item.getIntegerProperty("iq:iqAssessmentData/fsiq")</TD>
+				</TR>
+				<TR>
+					<TD>Verbal IQ</TD>
+					<TD>$!item.getIntegerProperty("iq:iqAssessmentData/verbalIq")</TD>
+				</TR>
+				<TR>
+					<TD>Performance IQ</TD>
+					<TD>$!item.getIntegerProperty("iq:iqAssessmentData/performanceIq")</TD>
+				</TR>
+				<TR>
+					<TD>IQ Source</TD>
+					<TD>$!item.getStringProperty("iq:iqAssessmentData/iqSrc")</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<BR /><BR />
+			#parse("/screens/XDATScreen_report_iq_wasi1999Data.vm")
+        </TD>
+    </TR>
+
+</TABLE>

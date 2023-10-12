@@ -1,0 +1,46 @@
+#set($int_note_vals=["-999","N/A","N/R","N/K"])
+<TR>
+	<TD>
+		<DIV class="edit_header1">WASI Assessment</DIV>
+    </TD>
+</TR>
+<TR>
+	<TD>
+        <TABLE>
+        	<TR>
+        		<TH align="left">Description</TH>
+        		<TH>Raw Score</TH>
+        		<TH>T-Score</TH>
+        		<TH>Notation</TH>
+        	</TR>
+        	<TR>
+        		<TD>Vocabulary</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_v_raw" $item "" $vr)</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_v_t" $item "" $vr)</TD>
+        		<TD>#xdatSelectBoxWSingleValue("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_v_note" $item $int_note_vals $vr)</TD>
+        	</TR>
+        	<TR>
+        		<TD>Block</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_b_raw" $item "" $vr)</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_b_t" $item "" $vr)</TD>
+        		<TD>#xdatSelectBoxWSingleValue("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_b_note" $item $int_note_vals $vr)</TD>
+        	</TR>
+        	<TR>
+        		<TD>Similarities</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_s_raw" $item "" $vr)</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_s_t" $item "" $vr)</TD>
+        		<TD>#xdatSelectBoxWSingleValue("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_s_note" $item $int_note_vals $vr)</TD>
+        	</TR>
+        	<TR>
+        		<TD>Matrix Reasoning</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_m_raw" $item "" $vr)</TD>
+        		<TD>#xdatTextBox("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_m_t" $item "" $vr)</TD>
+        		<TD>#xdatSelectBoxWSingleValue("iq:iqAssessmentData/iqTest[@xsi:type=iq:wasi1999Data]/wasi_m_note" $item $int_note_vals $vr)</TD>
+        	</TR>	
+        </TABLE>
+    </TD>
+	
+</TR>
+
+
+

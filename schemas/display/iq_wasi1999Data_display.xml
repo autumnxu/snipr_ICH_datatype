@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Displays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xdat/display.xsd" schema-element="iq:wasi1999Data" full-description="WASI1999" brief-description="WASI1999">
+	<DisplayField id="NOTE" header="note" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/note"/>
+	</DisplayField>
+	<DisplayField id="INSERT_DATE" header="Inserted" visible="true" searchable="true" data-type="string">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data.meta.insert_date"/>
+	</DisplayField>
+	<DisplayField id="INSERT_USER" header="Creator" visible="true" searchable="true" data-type="string">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data.meta.insert_user.login"/>
+	</DisplayField>
+	<DisplayField id="WASI_V_RAW" header="Vocab(Raw)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_v_raw"/>
+	</DisplayField>
+	<DisplayField id="WASI_V_T" header="Vocab(T)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_v_t"/>
+		<DisplayFieldElement name="Field2" schema-element="iq:wasi1999Data/wasi_v_note"/>
+		<Content type="sql">CASE WHEN @Field1 IS NULL THEN CASE WHEN @Field2 IS NULL THEN '' ELSE @Field2 END ELSE cast (@Field1 as varchar) END</Content>
+	</DisplayField>
+	<DisplayField id="WASI_V_NOTE" header="Vocab Notation" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_v_note"/>
+	</DisplayField>
+	<DisplayField id="WASI_B_RAW" header="Block(Raw)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_b_raw"/>
+	</DisplayField>
+	<DisplayField id="WASI_B_T" header="Block(T)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_b_t"/>
+		<DisplayFieldElement name="Field2" schema-element="iq:wasi1999Data/wasi_b_note"/>
+		<Content type="sql">CASE WHEN @Field1 IS NULL THEN CASE WHEN @Field2 IS NULL THEN '' ELSE @Field2 END ELSE cast (@Field1 as varchar) END</Content>
+	</DisplayField>
+	<DisplayField id="WASI_B_NOTE" header="Block Notation" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_b_note"/>
+	</DisplayField>
+	<DisplayField id="WASI_S_RAW" header="Similar(Raw)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_s_raw"/>
+	</DisplayField>
+	<DisplayField id="WASI_S_T" header="Similar(T)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_s_t"/>
+		<DisplayFieldElement name="Field2" schema-element="iq:wasi1999Data/wasi_s_note"/>
+		<Content type="sql">CASE WHEN @Field1 IS NULL THEN CASE WHEN @Field2 IS NULL THEN '' ELSE @Field2 END ELSE cast (@Field1 as varchar) END</Content>
+	</DisplayField>
+	<DisplayField id="WASI_S_NOTE" header="Similar Notation" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_s_note"/>
+	</DisplayField>
+	<DisplayField id="WASI_M_RAW" header="Matrix(Raw)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_m_raw"/>
+	</DisplayField>
+	<DisplayField id="WASI_M_T" header="Matrix(T)" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_m_t"/>
+		<DisplayFieldElement name="Field2" schema-element="iq:wasi1999Data/wasi_m_note"/>
+		<Content type="sql">CASE WHEN @Field1 IS NULL THEN CASE WHEN @Field2 IS NULL THEN '' ELSE @Field2 END ELSE cast (@Field1 as varchar) END</Content>
+	</DisplayField>
+	<DisplayField id="WASI_M_NOTE" header="Matrix Notation" visible="true" searchable="true">
+		<DisplayFieldElement name="Field1" schema-element="iq:wasi1999Data/wasi_m_note"/>
+	</DisplayField>	
+	<DisplayVersion versionName="listing" default-order-by="NOTE" default-sort-order="DESC" brief-description="WASI1999" dark-color="9999CC" light-color="CCCCFF">
+		<DisplayFieldRef id="WASI_V_T"/>
+		<DisplayFieldRef id="WASI_B_T"/>
+		<DisplayFieldRef id="WASI_S_T"/>
+		<DisplayFieldRef id="WASI_M_T"/>
+	</DisplayVersion>
+	<DisplayVersion versionName="full" default-order-by="NOTE" default-sort-order="DESC" brief-description="WASI1999" dark-color="9999CC" light-color="CCCCFF">
+		<DisplayFieldRef id="WASI_V_T"/>
+		<DisplayFieldRef id="WASI_B_T"/>
+		<DisplayFieldRef id="WASI_S_T"/>
+		<DisplayFieldRef id="WASI_M_T"/>
+	</DisplayVersion>
+</Displays>

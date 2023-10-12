@@ -1,0 +1,42 @@
+<TR>
+	<TD>
+		<DIV class="edit_title">WASI Assessment</DIV>
+    </TD>
+</TR>
+<TR>
+	<TD>
+        <TABLE>
+        	<TR>
+        		<TH align="left">Description</TH>
+        		<TH>Raw Score</TH>
+        		<TH>T-Score</TH>
+        		<TH>Notation</TH>
+        	</TR>
+        	<TR>
+        		<TD>Vocabulary</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_v_raw")</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_v_t")</TD>
+        		<TD>$!test_item.getStringProperty("iq:wasi1999Data/wasi_v_note")</TD>
+        	</TR>
+        	<TR>
+        		<TD>Block</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_b_raw")</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_b_t")</TD>
+        		<TD>$!test_item.getStringProperty("iq:wasi1999Data/wasi_b_note")</TD>
+        	</TR>
+        	<TR>
+        		<TD>Similarities</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_s_raw")</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_s_t")</TD>
+        		<TD>$!test_item.getStringProperty("iq:wasi1999Data/wasi_s_note")</TD>
+        	</TR>
+        	<TR>
+        		<TD>Matrix Reasoning</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_m_raw")</TD>
+        		<TD>$!test_item.getIntegerProperty("iq:wasi1999Data/wasi_m_t")</TD>
+        		<TD>$!test_item.getStringProperty("iq:wasi1999Data/wasi_m_note")</TD>
+        	</TR>	
+            <TR><TD>#xdatHiddenBox("iq:wasi1999Data/iq_abstractIQTest_id" $test_item "")</TD></TR>
+        </TABLE>
+    </TD>
+</TR>
